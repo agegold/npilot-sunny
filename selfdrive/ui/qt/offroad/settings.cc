@@ -73,8 +73,8 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
     },
     {
       "DisengageOnAccelerator",
-      "Disengage On Accelerator Pedal",
-      "When enabled, pressing the accelerator pedal will disengage openpilot.",
+      "엑셀레이터 페달 작동시 핸들조향 꺼짐",
+      "옵션을 키면 엑셀레이터 페달 작동시 오픈파일럿 해제.",
       "../assets/offroad/icon_disengage_on_accelerator.svg",
     },
 #ifdef ENABLE_MAPS
@@ -555,7 +555,7 @@ void SettingsWindow::hideEvent(QHideEvent *event) {
 /////////////////////////////////////////////////////////////////////////
 //opkr
 
-OpenpilotView::OpenpilotView() : AbstractControl("Driving Camera", "Preview the open pilot driving screen.", "") {
+OpenpilotView::OpenpilotView() : AbstractControl("도로 카메라", "운전 영상을 미리볼수 있습니다.", "") {
 
   // setup widget
   hlayout->addStretch(1);
@@ -601,7 +601,7 @@ void OpenpilotView::refresh() {
 
 
 
-ChargingMin::ChargingMin() : AbstractControl("BAT MinCharging Value", "Sets the minimum battery charge value.", "../assets/offroad/icon_shell.png") {
+ChargingMin::ChargingMin() : AbstractControl("배터리 최소 충전량", "배터리의 최소 충전량을 설정 할 수 있습니다.", "../assets/offroad/icon_shell.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -660,7 +660,7 @@ void ChargingMin::refresh() {
   label.setText(QString::fromStdString(params.get("OpkrBatteryChargingMin")));
 }
 
-ChargingMax::ChargingMax() : AbstractControl("BAT MaxCharging Value", "Sets the maximum battery charge value.", "../assets/offroad/icon_shell.png") {
+ChargingMax::ChargingMax() : AbstractControl("배터리 최대 충전량", "배터리의 최대 충전량을 설정 할 수 있습니다.", "../assets/offroad/icon_shell.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
