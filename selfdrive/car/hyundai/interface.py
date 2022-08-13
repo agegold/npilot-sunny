@@ -285,8 +285,8 @@ class CarInterface(CarInterfaceBase):
 
     #TORQUE ONLY
     #selfdrive/car/torque_data/params.yaml 참조해서 값 입력 https://codebeautify.org/jsonviewer/y220b1623
-    torque_lat_accel_factor = 2.5250855675875634 #LAT_ACCEL_FACTOR		
-    torque_friction = 0.13391574986922777 #FRICTION
+    torque_lat_accel_factor = 3.4 #LAT_ACCEL_FACTOR		
+    torque_friction = 0.01 #FRICTION
     ret.maxLateralAccel = 1.8303582523301922 #MAX_LAT_ACCEL_MEASURED		
     #토크
     set_torque_tune(ret.lateralTuning, torque_lat_accel_factor, torque_friction)
