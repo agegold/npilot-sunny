@@ -99,7 +99,7 @@ class CarInterface(CarInterfaceBase):
 
     ret.stopAccel = -2.0
     ret.stoppingDecelRate = 0.4  # brake_travel/s while trying to stop
-    ret.vEgoStopping = 0.5
+    ret.vEgoStopping = 0.6
     ret.vEgoStarting = 0.5
 
     # genesis
@@ -173,7 +173,7 @@ class CarInterface(CarInterfaceBase):
     elif candidate == CAR.PALISADE:
       ret.mass = 1999. + STD_CARGO_KG
       ret.wheelbase = 2.90
-      ret.steerRatio = 15.6
+      ret.steerRatio = 15.6 * 1.04
       tire_stiffness_factor = 0.63
     elif candidate in [CAR.ELANTRA, CAR.ELANTRA_GT_I30]:
       ret.mass = 1275. + STD_CARGO_KG
