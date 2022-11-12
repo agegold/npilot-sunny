@@ -1837,6 +1837,76 @@ int LiveSteerRatioToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = ToggleControl::qt_metacall(_c, _id, _a);
     return _id;
 }
+struct qt_meta_stringdata_UseNpilotManagerToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[23];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_UseNpilotManagerToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_UseNpilotManagerToggle_t qt_meta_stringdata_UseNpilotManagerToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 22) // "UseNpilotManagerToggle"
+
+    },
+    "UseNpilotManagerToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_UseNpilotManagerToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void UseNpilotManagerToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject UseNpilotManagerToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_UseNpilotManagerToggle.data,
+    qt_meta_data_UseNpilotManagerToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *UseNpilotManagerToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *UseNpilotManagerToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_UseNpilotManagerToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int UseNpilotManagerToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
 struct qt_meta_stringdata_VariableSteerMaxToggle_t {
     QByteArrayData data[1];
     char stringdata0[23];
@@ -2397,6 +2467,146 @@ int AutoEnableSpeed::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = AbstractControl::qt_metacall(_c, _id, _a);
     return _id;
 }
+struct qt_meta_stringdata_AutoCruiseSetToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_AutoCruiseSetToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_AutoCruiseSetToggle_t qt_meta_stringdata_AutoCruiseSetToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "AutoCruiseSetToggle"
+
+    },
+    "AutoCruiseSetToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_AutoCruiseSetToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void AutoCruiseSetToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject AutoCruiseSetToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_AutoCruiseSetToggle.data,
+    qt_meta_data_AutoCruiseSetToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *AutoCruiseSetToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *AutoCruiseSetToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_AutoCruiseSetToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int AutoCruiseSetToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_AutoCruiseSetDependsOnNdaToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[32];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_AutoCruiseSetDependsOnNdaToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_AutoCruiseSetDependsOnNdaToggle_t qt_meta_stringdata_AutoCruiseSetDependsOnNdaToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 31) // "AutoCruiseSetDependsOnNdaToggle"
+
+    },
+    "AutoCruiseSetDependsOnNdaToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_AutoCruiseSetDependsOnNdaToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void AutoCruiseSetDependsOnNdaToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject AutoCruiseSetDependsOnNdaToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_AutoCruiseSetDependsOnNdaToggle.data,
+    qt_meta_data_AutoCruiseSetDependsOnNdaToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *AutoCruiseSetDependsOnNdaToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *AutoCruiseSetDependsOnNdaToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_AutoCruiseSetDependsOnNdaToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int AutoCruiseSetDependsOnNdaToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
 struct qt_meta_stringdata_OPKRServerSelect_t {
     QByteArrayData data[1];
     char stringdata0[17];
@@ -2535,6 +2745,426 @@ void *OPKRServerAPI::qt_metacast(const char *_clname)
 int OPKRServerAPI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = AbstractControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_TimeZoneSelectCombo_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_TimeZoneSelectCombo_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_TimeZoneSelectCombo_t qt_meta_stringdata_TimeZoneSelectCombo = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "TimeZoneSelectCombo"
+
+    },
+    "TimeZoneSelectCombo"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_TimeZoneSelectCombo[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void TimeZoneSelectCombo::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject TimeZoneSelectCombo::staticMetaObject = { {
+    &AbstractControl::staticMetaObject,
+    qt_meta_stringdata_TimeZoneSelectCombo.data,
+    qt_meta_data_TimeZoneSelectCombo,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *TimeZoneSelectCombo::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *TimeZoneSelectCombo::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_TimeZoneSelectCombo.stringdata0))
+        return static_cast<void*>(this);
+    return AbstractControl::qt_metacast(_clname);
+}
+
+int TimeZoneSelectCombo::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = AbstractControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_UseBaseTorqueToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_UseBaseTorqueToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_UseBaseTorqueToggle_t qt_meta_stringdata_UseBaseTorqueToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "UseBaseTorqueToggle"
+
+    },
+    "UseBaseTorqueToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_UseBaseTorqueToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void UseBaseTorqueToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject UseBaseTorqueToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_UseBaseTorqueToggle.data,
+    qt_meta_data_UseBaseTorqueToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *UseBaseTorqueToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *UseBaseTorqueToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_UseBaseTorqueToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int UseBaseTorqueToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_CTorqueControlGroup_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_CTorqueControlGroup_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_CTorqueControlGroup_t qt_meta_stringdata_CTorqueControlGroup = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "CTorqueControlGroup"
+
+    },
+    "CTorqueControlGroup"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_CTorqueControlGroup[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void CTorqueControlGroup::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject CTorqueControlGroup::staticMetaObject = { {
+    &CGroupWidget::staticMetaObject,
+    qt_meta_stringdata_CTorqueControlGroup.data,
+    qt_meta_data_CTorqueControlGroup,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *CTorqueControlGroup::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *CTorqueControlGroup::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_CTorqueControlGroup.stringdata0))
+        return static_cast<void*>(this);
+    return CGroupWidget::qt_metacast(_clname);
+}
+
+int CTorqueControlGroup::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = CGroupWidget::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_UseLiveTorqueToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_UseLiveTorqueToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_UseLiveTorqueToggle_t qt_meta_stringdata_UseLiveTorqueToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "UseLiveTorqueToggle"
+
+    },
+    "UseLiveTorqueToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_UseLiveTorqueToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void UseLiveTorqueToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject UseLiveTorqueToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_UseLiveTorqueToggle.data,
+    qt_meta_data_UseLiveTorqueToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *UseLiveTorqueToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *UseLiveTorqueToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_UseLiveTorqueToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int UseLiveTorqueToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_HotspotOnBootToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[20];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_HotspotOnBootToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_HotspotOnBootToggle_t qt_meta_stringdata_HotspotOnBootToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 19) // "HotspotOnBootToggle"
+
+    },
+    "HotspotOnBootToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_HotspotOnBootToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void HotspotOnBootToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject HotspotOnBootToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_HotspotOnBootToggle.data,
+    qt_meta_data_HotspotOnBootToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *HotspotOnBootToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *HotspotOnBootToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_HotspotOnBootToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int HotspotOnBootToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
+    return _id;
+}
+struct qt_meta_stringdata_LowSpeedFactorToggle_t {
+    QByteArrayData data[1];
+    char stringdata0[21];
+};
+#define QT_MOC_LITERAL(idx, ofs, len) \
+    Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
+    qptrdiff(offsetof(qt_meta_stringdata_LowSpeedFactorToggle_t, stringdata0) + ofs \
+        - idx * sizeof(QByteArrayData)) \
+    )
+static const qt_meta_stringdata_LowSpeedFactorToggle_t qt_meta_stringdata_LowSpeedFactorToggle = {
+    {
+QT_MOC_LITERAL(0, 0, 20) // "LowSpeedFactorToggle"
+
+    },
+    "LowSpeedFactorToggle"
+};
+#undef QT_MOC_LITERAL
+
+static const uint qt_meta_data_LowSpeedFactorToggle[] = {
+
+ // content:
+       8,       // revision
+       0,       // classname
+       0,    0, // classinfo
+       0,    0, // methods
+       0,    0, // properties
+       0,    0, // enums/sets
+       0,    0, // constructors
+       0,       // flags
+       0,       // signalCount
+
+       0        // eod
+};
+
+void LowSpeedFactorToggle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    Q_UNUSED(_o);
+    Q_UNUSED(_id);
+    Q_UNUSED(_c);
+    Q_UNUSED(_a);
+}
+
+QT_INIT_METAOBJECT const QMetaObject LowSpeedFactorToggle::staticMetaObject = { {
+    &ToggleControl::staticMetaObject,
+    qt_meta_stringdata_LowSpeedFactorToggle.data,
+    qt_meta_data_LowSpeedFactorToggle,
+    qt_static_metacall,
+    nullptr,
+    nullptr
+} };
+
+
+const QMetaObject *LowSpeedFactorToggle::metaObject() const
+{
+    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
+}
+
+void *LowSpeedFactorToggle::qt_metacast(const char *_clname)
+{
+    if (!_clname) return nullptr;
+    if (!strcmp(_clname, qt_meta_stringdata_LowSpeedFactorToggle.stringdata0))
+        return static_cast<void*>(this);
+    return ToggleControl::qt_metacast(_clname);
+}
+
+int LowSpeedFactorToggle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+{
+    _id = ToggleControl::qt_metacall(_c, _id, _a);
     return _id;
 }
 QT_WARNING_POP

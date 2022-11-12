@@ -22,7 +22,11 @@ EventName = car.CarEvent.EventName
 MAX_CTRL_SPEED = (V_CRUISE_MAX + 4) * CV.KPH_TO_MS
 ACCEL_MAX = 2.0
 ACCEL_MIN = -3.5
-FRICTION_THRESHOLD = 0.2
+FRICTION_THRESHOLD = 0.3
+
+TORQUE_PARAMS_PATH = os.path.join(BASEDIR, 'selfdrive/car/torque_data/params.yaml')
+TORQUE_OVERRIDE_PATH = os.path.join(BASEDIR, 'selfdrive/car/torque_data/override.yaml')
+TORQUE_SUBSTITUTE_PATH = os.path.join(BASEDIR, 'selfdrive/car/torque_data/substitute.yaml')
 
 # generic car and radar interfaces
 
@@ -92,6 +96,29 @@ class CarInterfaceBase(ABC):
   def torque_from_lateral_accel(self):
     return self.torque_from_lateral_accel_linear
 
+  @staticmethod
+  def get_torque_params(candidate):
+    with open(TORQUE_SUBSTITUTE_PATH) as f:
+      sub = yaml.load(f, Loader=yaml.Loader)
+    if candidate in sub:
+      candidate = sub[candidate]
+
+    with open(TORQUE_PARAMS_PATH) as f:
+      params = yaml.load(f, Loader=yaml.Loader)
+    with open(TORQUE_OVERRIDE_PATH) as f:
+      override = yaml.load(f, Loader=yaml.Loader)
+
+    # Ensure no overlap
+    if sum([candidate in x for x in [sub, params, override]]) > 1:
+      raise RuntimeError(f'{candidate} is defined twice in torque config')
+
+    if candidate in override:
+      out = override[candidate]
+    elif candidate in params:
+      out = params[candidate]
+    else:
+      raise NotImplementedError(f"Did not find torque params for {candidate}")
+    return {key: out[i] for i, key in enumerate(params['legend'])}
 
   # returns a set of default params to avoid repetition in car specific params
   @staticmethod
@@ -168,10 +195,13 @@ class CarInterfaceBase(ABC):
   def create_common_events(self, cs_out, extra_gears=None, pcm_enable=True):
     events = Events()
 
-    if cs_out.doorOpen:
-      events.add(EventName.doorOpen)
-    if cs_out.seatbeltUnlatched:
-      events.add(EventName.seatbeltNotLatched)
+
+    # janpoo6427
+    if cs_out.gearShifter != GearShifter.park:
+      if cs_out.doorOpen:
+        events.add(EventName.doorOpen)
+      if cs_out.seatbeltUnlatched:
+        events.add(EventName.seatbeltNotLatched)
     if cs_out.gearShifter != GearShifter.drive and (extra_gears is None or
        cs_out.gearShifter not in extra_gears):
       events.add(EventName.wrongGear)
@@ -216,11 +246,7 @@ class CarInterfaceBase(ABC):
         events.add(EventName.pcmDisable)
 
     # janpoo6427
-    # auto engage when cruise enabled
-    if ntune_option_enabled('autoEngage'):
-      if cs_out.cruiseState.enabled:
-        if cs_out.gearShifter == GearShifter.drive and cs_out.vEgo > 4.166667:  # 15km/h
-          events.add(EventName.pcmEnable)
+    # move to controlsd
 
     return events
 

@@ -42,44 +42,44 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   std::vector<std::tuple<QString, QString, QString, QString>> toggles{
     {
       "OpenpilotEnabledToggle",
-      "오픈파일럿 사용",
-      "어댑티브 크루즈 컨트롤 및 차선 유지 지원을 위해 오픈파일럿 시스템을 사용하십시오. 이 기능을 사용하려면 항상 주의를 기울여야 합니다. 이 설정을 변경하는 것은 자동차의 전원이 꺼졌을 때 적용됩니다.",
+      "Enable openpilot",
+      "Use the openpilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature. Changing this setting takes effect when the car is powered off.",
       "../assets/offroad/icon_openpilot.png",
     },
     {
       "IsLdwEnabled",
-      "차선이탈 경보 사용",
-      "50km/h이상의 속도로 주행하는 동안 방향 지시등이 활성화되지 않은 상태에서 차량이 감지된 차선 위를 넘어갈 경우 원래 차선으로 다시 방향을 전환하도록 경고를 보냅니다.",
+      "Enable Lane Departure Warnings",
+      "Receive alerts to steer back into the lane when your vehicle drifts over a detected lane line without a turn signal activated while driving over 31 mph (50 km/h).",
       "../assets/offroad/icon_warning.png",
     },
     //{
     //  "IsRHD",
-    //  "우핸들 운전방식 사용",
-    //  "오픈파일럿이 좌측 교통 규칙을 준수하도록 허용하고 우측 운전석에서 운전자 모니터링을 수행하십시오.",
+    //  "Enable Right-Hand Drive",
+    //  "Allow openpilot to obey left-hand traffic conventions and perform driver monitoring on right driver seat.",
     //  "../assets/offroad/icon_openpilot_mirrored.png",
     //},
     {
       "IsMetric",
-      "미터법 사용",
-      "mi/h 대신 km/h 단위로 속도를 표시합니다.",
+      "Use Metric System",
+      "Display speed in km/h instead of mph.",
       "../assets/offroad/icon_metric.png",
     },
     {
       "RecordFront",
-      "운전자 영상 녹화 및 업로드",
-      "운전자 모니터링 카메라에서 데이터를 업로드하고 운전자 모니터링 알고리즘을 개선하십시오.",
+      "Record and Upload Driver Camera",
+      "Upload data from the driver facing camera and help improve the driver monitoring algorithm.",
       "../assets/offroad/icon_monitoring.png",
     },
     {
       "EndToEndToggle",
-      "\U0001f96c 차선이 없을 때 사용 버전 (알파) \U0001f96c",
-      "이 모드에서 openpilot은 차선을 무시하고 사람이 생각하는대로 운전합니다.",
+      "\U0001f96c Disable use of lanelines (Alpha) \U0001f96c",
+      "In this mode openpilot will ignore lanelines and just drive how it thinks a human would.",
       "../assets/offroad/icon_road.png",
     },
     {
       "DisengageOnAccelerator",
-      "엑셀레이터 페달 작동시 핸들조향 꺼짐",
-      "옵션을 키면 엑셀레이터 페달 작동시 오픈파일럿 해제.",
+      "Disengage On Accelerator Pedal",
+      "When enabled, pressing the accelerator pedal will disengage openpilot.",
       "../assets/offroad/icon_disengage_on_accelerator.svg",
     },
 
@@ -99,8 +99,8 @@ TogglesPanel::TogglesPanel(SettingsWindow *parent) : ListWidget(parent) {
   if (params.getBool("DisableRadar_Allow")) {
     toggles.push_back({
       "DisableRadar",
-      "오픈파일럿이 가감속을 조절합니다.",
-      "openpilot은 자동차의 레이더를 비활성화하고 가속과 브레이크를 제어합니다. 경고: 이것은 AEB를 비활성화합니다!",
+      "openpilot Longitudinal Control",
+      "openpilot will disable the car's radar and will take over control of gas and brakes. Warning: this disables AEB!",
       "../assets/offroad/icon_speed_limit.png",
     });
   }
@@ -125,7 +125,7 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   reset_layout->setSpacing(30);
 
   // reset calibration button
-  QPushButton *restart_openpilot_btn = new QPushButton("소프트 재시작");
+  QPushButton *restart_openpilot_btn = new QPushButton("Soft restart");
   restart_openpilot_btn->setStyleSheet("height: 120px;border-radius: 15px;background-color: #393939;");
   reset_layout->addWidget(restart_openpilot_btn);
   QObject::connect(restart_openpilot_btn, &QPushButton::released, [=]() {
@@ -136,11 +136,11 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   });
 
   // reset calibration button
-  QPushButton *reset_calib_btn = new QPushButton("캘리브레이션과 라이브파라미터 리셋");
+  QPushButton *reset_calib_btn = new QPushButton("Reset Calibration");
   reset_calib_btn->setStyleSheet("height: 120px;border-radius: 15px;background-color: #393939;");
   reset_layout->addWidget(reset_calib_btn);
   QObject::connect(reset_calib_btn, &QPushButton::released, [=]() {
-    if (ConfirmationDialog::confirm("캘리브레이션과 라이브파라미터를 초기화 하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("Are you sure you want to reset calibration and live params?", this)) {
       Params().remove("CalibrationParams");
       Params().remove("LiveParameters");
       emit closeSettings();
@@ -154,38 +154,29 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
   // offroad-only buttons
   addItem(new OpenpilotView());
-  auto dcamBtn = new ButtonControl("운전자 영상", "미리보기",
-                                   "운전자 영상이 제대로 작동하는지 확인을 합니다. 차량을 끄고 사용하도록 하십시오.");
+  auto dcamBtn = new ButtonControl("Driver Camera", "PREVIEW",
+                                   "Preview the driver facing camera to help optimize device mounting position for best driver monitoring experience. (vehicle must be off)");
   connect(dcamBtn, &ButtonControl::clicked, [=]() { emit showDriverView(); });
   addItem(dcamBtn);
 
-  auto resetCalibBtn = new ButtonControl("캘리브레이션 초기화", "초기화", " ");
+  auto resetCalibBtn = new ButtonControl("Reset Calibration", "RESET", " ");
   connect(resetCalibBtn, &ButtonControl::showDescription, this, &DevicePanel::updateCalibDescription);
   connect(resetCalibBtn, &ButtonControl::clicked, [&]() {
-    if (ConfirmationDialog::confirm("캘리브레이션을 초기화 하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("Are you sure you want to reset calibration?", this)) {
       params.remove("CalibrationParams");
     }
   });
   addItem(resetCalibBtn);
 
   if (!params.getBool("Passive")) {
-    auto retrainingBtn = new ButtonControl("트레이닝 가이드", "가이드 보기", "오픈파일럿의 제한적 상황과 규정을 확인");
+    auto retrainingBtn = new ButtonControl("Review Training Guide", "REVIEW", "Review the rules, features, and limitations of openpilot");
     connect(retrainingBtn, &ButtonControl::clicked, [=]() {
-      if (ConfirmationDialog::confirm("트레이닝 가이드를 확인하시겠습니까?", this)) {
+      if (ConfirmationDialog::confirm("Are you sure you want to review the training guide?", this)) {
         emit reviewTrainingGuide();
       }
     });
     addItem(retrainingBtn);
   }
-
-  const char* cal_ok = "cp -f /data/openpilot/selfdrive/assets/CalibrationParams /data/params/d/";
-  auto calokbtn = new ButtonControl("캘리브레이션 강제 활성화", "실행");
-  QObject::connect(calokbtn, &ButtonControl::clicked, [=]() {
-    if (ConfirmationDialog::confirm("캘리브레이션을 강제로 설정합니다. 인게이지 확인용이니 실 주행시에는 초기화 하시기 바랍니다.", this)){
-      std::system(cal_ok);
-    }
-  });
-    addItem(calokbtn);
 
   if (Hardware::TICI()) {
     auto regulatoryBtn = new ButtonControl("Regulatory", "VIEW", "");
@@ -206,17 +197,17 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
   QHBoxLayout *power_layout = new QHBoxLayout();
   power_layout->setSpacing(30);
 
-  QPushButton *reboot_btn = new QPushButton("재부팅");
+  QPushButton *reboot_btn = new QPushButton("Reboot");
   reboot_btn->setObjectName("reboot_btn");
   power_layout->addWidget(reboot_btn);
   QObject::connect(reboot_btn, &QPushButton::clicked, this, &DevicePanel::reboot);
 
-  QPushButton *rebuild_btn = new QPushButton("리빌드");
+  QPushButton *rebuild_btn = new QPushButton("Rebuild");
   rebuild_btn->setObjectName("rebuild_btn");
   power_layout->addWidget(rebuild_btn);
   QObject::connect(rebuild_btn, &QPushButton::clicked, [=]() {
 
-    if (ConfirmationDialog::confirm("리빌드를 진행 하시겠습니까", this)) {
+    if (ConfirmationDialog::confirm("Are you sure you want to rebuild?", this)) {
       std::system("cd /data/openpilot && scons -c");
       std::system("rm /data/openpilot/.sconsign.dblite");
       std::system("rm /data/openpilot/prebuilt");
@@ -250,7 +241,8 @@ DevicePanel::DevicePanel(SettingsWindow *parent) : ListWidget(parent) {
 
 void DevicePanel::updateCalibDescription() {
   QString desc =
-      "오픈파일럿은 좌우로 4° 위아래로 5° 를 보정합니다. 그 이상의 경우 보정이 필요합니다.";
+      "openpilot requires the device to be mounted within 4° left or right and "
+      "within 5° up or 8° down. openpilot is continuously calibrating, resetting is rarely required.";
   std::string calib_bytes = Params().get("CalibrationParams");
   if (!calib_bytes.empty()) {
     try {
@@ -260,9 +252,9 @@ void DevicePanel::updateCalibDescription() {
       if (calib.getCalStatus() != 0) {
         double pitch = calib.getRpyCalib()[1] * (180 / M_PI);
         double yaw = calib.getRpyCalib()[2] * (180 / M_PI);
-        desc += QString(" \n장치가 %1° %2 그리고 %3° %4 위치해 있습니다.")
-                    .arg(QString::number(std::abs(pitch), 'g', 1), pitch > 0 ? "위로" : "아래로",
-                         QString::number(std::abs(yaw), 'g', 1), yaw > 0 ? "오른쪽으로" : "왼쪽으로");
+        desc += QString(" Your device is pointed %1° %2 and %3° %4.")
+                    .arg(QString::number(std::abs(pitch), 'g', 1), pitch > 0 ? "down" : "up",
+                         QString::number(std::abs(yaw), 'g', 1), yaw > 0 ? "left" : "right");
       }
     } catch (kj::Exception) {
       qInfo() << "invalid CalibrationParams";
@@ -273,7 +265,7 @@ void DevicePanel::updateCalibDescription() {
 
 void DevicePanel::reboot() {
   if (!uiState()->engaged()) {
-    if (ConfirmationDialog::confirm("장치를 재부팅 하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("Are you sure you want to reboot?", this)) {
       // Check engaged again in case it changed while the dialog was open
       if (!uiState()->engaged()) {
         Params().putBool("DoReboot", true);
@@ -286,7 +278,7 @@ void DevicePanel::reboot() {
 
 void DevicePanel::poweroff() {
   if (!uiState()->engaged()) {
-    if (ConfirmationDialog::confirm("전원을 종료하시겠습니까?", this)) {
+    if (ConfirmationDialog::confirm("Are you sure you want to power off?", this)) {
       // Check engaged again in case it changed while the dialog was open
       if (!uiState()->engaged()) {
         Params().putBool("DoShutdown", true);
@@ -368,16 +360,18 @@ C2NetworkPanel::C2NetworkPanel(QWidget *parent) : QWidget(parent) {
   list->setSpacing(30);
   // wifi + tethering buttons
 #ifdef QCOM
-  auto wifiBtn = new ButtonControl("네트워크 설정", "열기");
+  auto wifiBtn = new ButtonControl("Wi-Fi Settings", "OPEN");
   QObject::connect(wifiBtn, &ButtonControl::clicked, [=]() { HardwareEon::launch_wifi(); });
   list->addItem(wifiBtn);
 
-  auto tetheringBtn = new ButtonControl("테더링 설정", "열기");
+  auto tetheringBtn = new ButtonControl("Tethering Settings", "OPEN");
   QObject::connect(tetheringBtn, &ButtonControl::clicked, [=]() { HardwareEon::launch_tethering(); });
   list->addItem(tetheringBtn);
 #endif
   ipaddress = new LabelControl("IP Address", "");
   list->addItem(ipaddress);
+
+  list->addItem(new HotspotOnBootToggle());
 
   // SSH key management
   list->addItem(new SshToggle());
@@ -480,11 +474,11 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
   QObject::connect(device, &DevicePanel::closeSettings, this, &SettingsWindow::closeSettings);
 
   QList<QPair<QString, QWidget *>> panels = {
-    {"장치", device},
-    {"네트워크", network_panel(this)},
-    {"토글메뉴", new TogglesPanel(this)},
-    {"소프트웨어", new SoftwarePanel(this)},
-    {"커뮤니티", new CommunityPanel(this)},
+    {"Device", device},
+    {"Network", network_panel(this)},
+    {"Toggles", new TogglesPanel(this)},
+    {"Software", new SoftwarePanel(this)},
+    {"Community", new CommunityPanel(this)},
   };
 
 #ifdef ENABLE_MAPS
@@ -532,12 +526,12 @@ SettingsWindow::SettingsWindow(QWidget *parent) : QFrame(parent) {
       panel_widget->setCurrentWidget(w);
     });
   }
-  sidebar_layout->setContentsMargins(5, 50, 20, 50);
+  sidebar_layout->setContentsMargins(5, 50, 10, 50);
 
   // main settings layout, sidebar + main panel
   QHBoxLayout *main_layout = new QHBoxLayout(this);
 
-  sidebar_widget->setFixedWidth(330);
+  sidebar_widget->setFixedWidth(320);
   main_layout->addWidget(sidebar_widget);
   main_layout->addWidget(panel_widget);
 
@@ -561,7 +555,7 @@ void SettingsWindow::hideEvent(QHideEvent *event) {
 /////////////////////////////////////////////////////////////////////////
 //opkr
 
-OpenpilotView::OpenpilotView() : AbstractControl("도로 카메라", "운전 영상을 미리볼수 있습니다.", "") {
+OpenpilotView::OpenpilotView() : AbstractControl("Driving Camera", "Preview the open pilot driving screen.", "") {
 
   // setup widget
   hlayout->addStretch(1);
@@ -607,7 +601,7 @@ void OpenpilotView::refresh() {
 
 
 
-ChargingMin::ChargingMin() : AbstractControl("배터리 최소 충전량", "배터리의 최소 충전량을 설정 할 수 있습니다.", "../assets/offroad/icon_shell.png") {
+ChargingMin::ChargingMin() : AbstractControl("BAT MinCharging Value", "Sets the minimum battery charge value.", "../assets/offroad/icon_shell.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -666,7 +660,7 @@ void ChargingMin::refresh() {
   label.setText(QString::fromStdString(params.get("OpkrBatteryChargingMin")));
 }
 
-ChargingMax::ChargingMax() : AbstractControl("배터리 최대 충전량", "배터리의 최대 충전량을 설정 할 수 있습니다.", "../assets/offroad/icon_shell.png") {
+ChargingMax::ChargingMax() : AbstractControl("BAT MaxCharging Value", "Sets the maximum battery charge value.", "../assets/offroad/icon_shell.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1060,7 +1054,7 @@ void OPKREdgeOffset::refreshr() {
   labelr.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-CameraOffset::CameraOffset() : AbstractControl(tr("CameraOffset"), tr("Sets the CameraOffset value. (+value:Move Left, -value:Move Right)"), "../assets/offroad/icon_shell.png") {
+CameraOffset::CameraOffset() : AbstractControl(tr("CameraOffset"), tr("Sets the CameraOffset value. (+value:Move Left, -value:Move Right)"), "../assets/offroad/icon_road.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1123,7 +1117,7 @@ void CameraOffset::refresh() {
   label.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-PathOffset::PathOffset() : AbstractControl(tr("PathOffset"), tr("Sets the PathOffset value. (+value:Move left, -value:Move right)"), "../assets/offroad/icon_shell.png") {
+PathOffset::PathOffset() : AbstractControl(tr("PathOffset"), tr("Sets the PathOffset value. (+value:Move left, -value:Move right)"), "../assets/offroad/icon_road.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1187,7 +1181,7 @@ void PathOffset::refresh() {
 }
 
 
-SteerActuatorDelay::SteerActuatorDelay() : AbstractControl(tr("SteerActuatorDelay"), tr("Adjust the SteerActuatorDelay value."), "../assets/offroad/icon_shell.png") {
+SteerActuatorDelay::SteerActuatorDelay() : AbstractControl(tr("SteerActuatorDelay"), tr("Adjust the SteerActuatorDelay value."), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1251,7 +1245,7 @@ void SteerActuatorDelay::refresh() {
 }
 
 
-SteerLimitTimer::SteerLimitTimer() : AbstractControl(tr("SteerLimitTimer"), tr("Adjust the SteerLimitTimer value."), "../assets/offroad/icon_shell.png") {
+SteerLimitTimer::SteerLimitTimer() : AbstractControl(tr("SteerLimitTimer"), tr("Adjust the SteerLimitTimer value."), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1314,7 +1308,7 @@ void SteerLimitTimer::refresh() {
   label.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-SRBaseControl::SRBaseControl() : AbstractControl(tr("SteerRatio"), tr("Sets the SteerRatio default value."), "../assets/offroad/icon_shell.png") {
+SRBaseControl::SRBaseControl() : AbstractControl(tr("SteerRatio"), tr("Sets the SteerRatio default value."), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1412,7 +1406,7 @@ void SRBaseControl::refresh() {
   label.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-SRMaxControl::SRMaxControl() : AbstractControl(tr("SteerRatioMax"), tr("Sets the SteerRatio maximum value."), "../assets/offroad/icon_shell.png") {
+SRMaxControl::SRMaxControl() : AbstractControl(tr("SteerRatioMax"), tr("Sets the SteerRatio maximum value."), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1510,7 +1504,7 @@ void SRMaxControl::refresh() {
   label.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-LiveSRPercent::LiveSRPercent() : AbstractControl(tr("LiveSR Adjust(%)"), tr("When using LiveSR, the learned value is arbitrarily adjusted (%) and used. -Value:Lower from learned value, +Value:Lower from learned value"), "../assets/offroad/icon_shell.png") {
+LiveSRPercent::LiveSRPercent() : AbstractControl(tr("LiveSR Adjust(%)"), tr("When using LiveSR, the learned value is arbitrarily adjusted (%) and used. -Value:Lower from learned value, +Value:Lower from learned value"), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1574,7 +1568,7 @@ void LiveSRPercent::refresh() {
   btnplus.setText("+");
 }
 
-TorqueFriction::TorqueFriction() : AbstractControl(tr("Friction"), tr("Adjust Friction"), "../assets/offroad/icon_shell.png") {
+TorqueFriction::TorqueFriction() : AbstractControl(tr("FRICTION"), tr("Adjust Friction"), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1637,7 +1631,7 @@ void TorqueFriction::refresh() {
   label.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-TorqueMaxLatAccel::TorqueMaxLatAccel() : AbstractControl(tr("MaxLatAccel"), tr("Adjust MaxLatAccel"), "../assets/offroad/icon_shell.png") {
+TorqueMaxLatAccel::TorqueMaxLatAccel() : AbstractControl(tr("LAT_ACCEL_FACTOR"), tr("Adjust LatAccelFactor"), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1700,7 +1694,7 @@ void TorqueMaxLatAccel::refresh() {
   label.setText(QString::fromStdString(valuefs.toStdString()));
 }
 
-AutoEnableSpeed::AutoEnableSpeed() : AbstractControl(tr("Auto Engage Spd(kph)"), tr("Set the automatic engage speed."), "../assets/offroad/icon_shell.png") {
+AutoEnableSpeed::AutoEnableSpeed() : AbstractControl(tr("Auto Engage Spd(kph)"), tr("Set the automatic engage speed."), "../assets/offroad/icon_openpilot.png") {
 
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
@@ -1766,7 +1760,7 @@ void AutoEnableSpeed::refresh() {
   btnplus.setText("+");
 }
 
-OPKRServerSelect::OPKRServerSelect() : AbstractControl(tr("API Server"), tr("Set API server to OPKR/Comma/User's"), "../assets/offroad/icon_shell.png") {
+OPKRServerSelect::OPKRServerSelect() : AbstractControl(tr("API Server"), tr("Set API server to OPKR/User's"), "../assets/offroad/icon_shell.png") {
   btn1.setStyleSheet(R"(
     padding: 0;
     border-radius: 50px;
@@ -1795,10 +1789,10 @@ OPKRServerSelect::OPKRServerSelect() : AbstractControl(tr("API Server"), tr("Set
   )");
   btn3.setFixedSize(250, 100);
   hlayout->addWidget(&btn1);
-  hlayout->addWidget(&btn2);
+  //hlayout->addWidget(&btn2);
   hlayout->addWidget(&btn3);
   btn1.setText(tr("OPKR"));
-  btn2.setText(tr("Comma"));
+  //btn2.setText(tr("Comma"));
   btn3.setText(tr("User's"));
 
   QObject::connect(&btn1, &QPushButton::clicked, [=]() {
@@ -1898,7 +1892,7 @@ void OPKRServerSelect::refresh() {
   }
 }
 
-OPKRServerAPI::OPKRServerAPI() : AbstractControl(tr("User's API"), tr("Set Your API server URL or IP"), "") {
+OPKRServerAPI::OPKRServerAPI() : AbstractControl(tr("User's API"), tr("Set Your API server URL or IP"), "../assets/offroad/icon_shell.png") {
   label.setAlignment(Qt::AlignVCenter|Qt::AlignRight);
   label.setStyleSheet("color: #e0e879");
   hlayout->addWidget(&label);
@@ -1949,6 +1943,98 @@ void OPKRServerAPI::refresh() {
   } else {
     btn.setText(tr("SET"));
   }
+}
+
+TimeZoneSelectCombo::TimeZoneSelectCombo() : AbstractControl("TZ", "", "../assets/offroad/icon_shell.png") 
+{
+  combobox.setStyleSheet(R"(
+    subcontrol-origin: padding;
+    subcontrol-position: top left;
+    selection-background-color: #111;
+    selection-color: yellow;
+    color: white;
+    background-color: #393939;
+    border-style: solid;
+    border: 0px solid #1e1e1e;
+    border-radius: 0;
+    width: 100px;
+  )");
+
+  combobox.addItem(tr("Select Your TimeZone"));
+  QFile timezonelistfile("/data/openpilot/selfdrive/assets/addon/param/TimeZone");
+  if (timezonelistfile.open(QIODevice::ReadOnly)) {
+    QTextStream timezonename(&timezonelistfile);
+    while (!timezonename.atEnd()) {
+      QString line = timezonename.readLine();
+      combobox.addItem(line);
+    }
+    timezonelistfile.close();
+  }
+
+  combobox.setFixedWidth(950);
+
+  btn.setStyleSheet(R"(
+    padding: 0;
+    border-radius: 50px;
+    font-size: 35px;
+    font-weight: 500;
+    color: #E4E4E4;
+    background-color: #393939;
+  )");
+
+  btn.setFixedSize(150, 100);
+
+  QObject::connect(&btn, &QPushButton::clicked, [=]() {
+    if (btn.text() == tr("UNSET")) {
+      if (ConfirmationDialog::confirm(tr("Do you want to set default?"), this)) {
+        params.put("OPKRTimeZone", "UTC");
+        combobox.setCurrentIndex(0);
+        refresh();
+      }
+    }
+  });
+
+  //combobox.view()->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+  hlayout->addWidget(&combobox, Qt::AlignLeft);
+  hlayout->addWidget(&btn, Qt::AlignRight);
+
+  QObject::connect(&combobox, static_cast<void(QComboBox::*)(int)>(&QComboBox::activated), [=](int index)
+  {
+    combobox.itemData(combobox.currentIndex());
+    QString str = combobox.currentText();
+    if (combobox.currentIndex() != 0) {
+      if (ConfirmationDialog::confirm(tr("Press OK to set your timezone as") + "\n" + str, this)) {
+        params.put("OPKRTimeZone", str.toStdString());
+      }
+    }
+    refresh();
+  });
+  refresh();
+}
+
+void TimeZoneSelectCombo::refresh() {
+  QString selected_timezonename = QString::fromStdString(params.get("OPKRTimeZone"));
+  int index = combobox.findText(selected_timezonename);
+  if (index >= 0) combobox.setCurrentIndex(index);
+  if (selected_timezonename.length()) {
+    btn.setEnabled(true);
+    btn.setText(tr("UNSET"));
+  } else {
+    btn.setEnabled(false);
+    btn.setText(tr("SET"));
+  }
+}
+
+CTorqueControlGroup::CTorqueControlGroup() : CGroupWidget( tr("Torque Control Options") )
+{
+  QVBoxLayout *pBoxLayout = CreateBoxLayout();
+
+  pBoxLayout->addWidget(new SRBaseControl());
+  pBoxLayout->addWidget(new TorqueMaxLatAccel());
+  pBoxLayout->addWidget(new TorqueFriction());
+  pBoxLayout->addWidget(new UseLiveTorqueToggle());
+  pBoxLayout->addWidget(new LowSpeedFactorToggle());
 }
 
 
@@ -2041,88 +2127,105 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
     }
   )");
 
+  QString useNpilotManager = QString::fromStdString(Params().get("UseNpilotManager"));
+  bool useNM = QVariant(useNpilotManager).toBool();
+  QString UseBaseTorqueValues = QString::fromStdString(Params().get("UseBaseTorqueValues"));
+  bool useBaseValues = QVariant(UseBaseTorqueValues).toBool();
   QList<ParamControl*> toggles;
 
-  toggleLayout->addWidget(new LabelControl(tr("〓〓〓〓〓〓〓〓〓〓【 TUNING 】〓〓〓〓〓〓〓〓〓〓"), ""));
-  toggleLayout->addWidget(new CameraOffset());
-  toggleLayout->addWidget(new PathOffset());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new CloseToRoadEdgeToggle());
-  toggleLayout->addWidget(new OPKREdgeOffset());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new LiveSteerRatioToggle());
-  toggleLayout->addWidget(new LiveSRPercent());
-  toggleLayout->addWidget(new SRBaseControl());
-  toggleLayout->addWidget(new SRMaxControl());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new SteerActuatorDelay());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new SteerLimitTimer());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new TorqueMaxLatAccel());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new TorqueFriction());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new AutoEnabledToggle());
-  toggleLayout->addWidget(new AutoEnableSpeed());
+  toggleLayout->addWidget(new UseNpilotManagerToggle());
 
-  toggles.append(new ParamControl("IsLiveTorque",
-                                            "Enable Live Torque",
-                                            "",
-                                            "../assets/offroad/icon_shell.png",
-                                            this));
+  if (!useNM) {
+    toggleLayout->addWidget(new LabelControl(tr("〓〓〓〓〓〓〓〓〓〓【 OFFSET 】〓〓〓〓〓〓〓〓〓〓"), ""));
+    toggleLayout->addWidget(new CameraOffset());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new PathOffset());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new CloseToRoadEdgeToggle());
+    toggleLayout->addWidget(new OPKREdgeOffset());
 
-  toggles.append(new ParamControl("IsLowSpeedFactor",
-                                            "Enable Low Speed Factor",
-                                            "",
-                                            "../assets/offroad/icon_shell.png",
-                                            this));
+    toggleLayout->addWidget(new LabelControl(tr("〓〓〓〓〓〓〓〓〓〓【 TUNING 】〓〓〓〓〓〓〓〓〓〓"), ""));
+    toggleLayout->addWidget(new UseBaseTorqueToggle());
+    toggleLayout->addWidget(horizontal_line());
+
+    if(!useBaseValues)
+      toggleLayout->addWidget(new CTorqueControlGroup());
+    else
+      toggleLayout->addWidget(new LowSpeedFactorToggle());
+
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new SteerActuatorDelay());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new SteerLimitTimer());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new AutoEnabledToggle());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new AutoEnableSpeed());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new AutoCruiseSetToggle());
+    toggleLayout->addWidget(horizontal_line());
+    toggleLayout->addWidget(new AutoCruiseSetDependsOnNdaToggle());
+
+  }
+
 
   toggles.append(new ParamControl("UseClusterSpeed",
-                                            "계기반 속도 사용",
-                                            "휠 속도 대신에 계기반 속도 사용",
+                                            "Use Cluster Speed",
+                                            "Use cluster speed instead of wheel speed.",
                                             "../assets/offroad/icon_road.png",
                                             this));
 
   toggles.append(new ParamControl("LongControlEnabled",
-                                            "롱컨트롤 사용",
-                                            "경고 : 오픈파일럿이 속도를 조절합니다. 주의 하시길 바랍니다.",
+                                            "Enable HKG Long Control",
+                                            "warnings: it is beta, be careful!! Openpilot will control the speed of your car",
                                             "../assets/offroad/icon_road.png",
                                             this));
 
   toggles.append(new ParamControl("MadModeEnabled",
-                                            "매드모드 사용",
-                                            "HKG 매드모드 사용. 가감속을 사용 하지 않아도 핸들 조향을 사용합니다.",
+                                            "Enable HKG MAD mode",
+                                            "Openpilot will engage when turn cruise control on",
                                             "../assets/offroad/icon_openpilot.png",
                                             this));
 
   toggles.append(new ParamControl("IsLdwsCar",
                                             "LDWS",
-                                            "LDWS 옵션인 경우 사용",
+                                            "If your car only supports LDWS, turn it on.",
                                             "../assets/offroad/icon_openpilot.png",
                                             this));
 
   toggles.append(new ParamControl("LaneChangeEnabled",
-                                            "차선 변경 사용",
-                                            "주변의 안전을 확인하고, 방향 지시등을 활성화하고, 원하는 차선을 향해 스티어링 휠을 부드럽게 밀어서 오픈 파일럿으로 보조 차선 변경을 수행하십시오. openpilot은 차선 변경이 안전한지 확인할 수 없습니다. 이 기능을 사용하려면 주변을 지속적으로 관찰해야합니다.",
+                                            "Enable Lane Change Assist",
+                                            "Perform assisted lane changes with openpilot by checking your surroundings for safety, activating the turn signal and gently nudging the steering wheel towards your desired lane. openpilot is not capable of checking if a lane change is safe. You must continuously observe your surroundings to use this feature.",
                                             "../assets/offroad/icon_road.png",
                                             this));
 
   toggles.append(new ParamControl("AutoLaneChangeEnabled",
-                                            "자동 차선변경 사용-(핸들조작없이 차선변경)",
-                                            "경고 : 베타이기 때문에 조심히 사용하세요!!",
+                                            "Enable Auto Lane Change(Nudgeless)",
+                                            "warnings: it is beta, be careful!!",
                                             "../assets/offroad/icon_road.png",
                                             this));
 
   toggles.append(new ParamControl("SccSmootherSlowOnCurves",
-                                            "커브 감속 사용",
+                                            "Enable Slow On Curves",
                                             "",
                                             "../assets/offroad/icon_road.png",
                                             this));
 
+  toggles.append(new ParamControl("TurnVisionControl",
+                                  "Enable vision based turn control",
+                                  "Use vision path predictions to estimate the appropiate speed to drive through turns ahead.",
+                                  "../assets/offroad/icon_road.png",
+                                  this));                                            
+
+  // toggles.append(new ParamControl("StopAtStopSign",
+  //                                 "Stop at Stop Light",
+  //                                 "Openpilot tries to stop at stop light.",
+  //                                 "../assets/offroad/icon_road.png",
+  //                                 this));   
+
   toggles.append(new ParamControl("SccSmootherSyncGasPressed",
-                                            "크루즈 속도의 동기화",
-                                            "크루즈 속도를 설정 후 엑셀로 인해 설정 속도보다 가속 속도가 높아지면 그 속도에 크루즈 설정 속도가 동기화 됩니다.",
+                                            "Sync set speed on gas pressed",
+                                            "",
                                             "../assets/offroad/icon_road.png",
                                             this));
 
@@ -2133,7 +2236,7 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
                                             this));
 
   toggles.append(new ParamControl("KeepSteeringTurnSignals",
-                                            "방향지시등 작동시 조향 일시해제",
+                                            "Keep steering while turn signals",
                                             "",
                                             "../assets/offroad/icon_openpilot.png",
                                             this));
@@ -2143,14 +2246,8 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
                                             "../assets/offroad/icon_openpilot.png",
                                             this));
 
-  /*toggles.append(new ParamControl("NewRadarInterface",
-                                            "Use new radar interface",
-                                            "",
-                                            "../assets/offroad/icon_road.png",
-                                            this));*/
-
   toggles.append(new ParamControl("DisableOpFcw",
-                                            "오픈파일럿 추돌경고 해제",
+                                            "Disable Openpilot FCW",
                                             "",
                                             "../assets/offroad/icon_shell.png",
                                             this));
@@ -2161,17 +2258,17 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
                                             "../assets/offroad/icon_shell.png",
                                             this));
 
-  toggles.append(new ParamControl("OpkrBatteryChargingControl",
-                                            "배터리 충전량 제어",
-                                            "배터리 최대 충전량을 설정하려면 사용하세요",
+  toggles.append(new ParamControl("ShowTrafficSignal",
+                                            "Show Traffic Signal",
+                                            "",
+                                            "../assets/offroad/icon_shell.png",
+                                            this));                                      
+
+  if (!useNM) toggles.append(new ParamControl("OpkrBatteryChargingControl",
+                                            "Enable Battery Charging Control",
+                                            "It uses the battery charge control function.",
                                             "../assets/offroad/icon_shell.png",
                                             this));
-
-  /*toggles.append(new ParamControl("CustomLeadMark",
-                                            "Use custom lead mark",
-                                            "",
-                                            "../assets/offroad/icon_road.png",
-                                            this));*/
 
   for(ParamControl *toggle : toggles) {
     if(main_layout->count() != 0) {
@@ -2180,20 +2277,22 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
     toggleLayout->addWidget(toggle);
   }
 
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new ChargingMin());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new ChargingMax());
+  if (!useNM) toggleLayout->addWidget(horizontal_line());
+  if (!useNM) toggleLayout->addWidget(new ChargingMin());
+  if (!useNM) toggleLayout->addWidget(horizontal_line());
+  if (!useNM) toggleLayout->addWidget(new ChargingMax());
   toggleLayout->addWidget(horizontal_line());
   toggleLayout->addWidget(new BrightnessControl());
   toggleLayout->addWidget(horizontal_line());
   toggleLayout->addWidget(new AutoScreenOff());
   toggleLayout->addWidget(horizontal_line());
   toggleLayout->addWidget(new BrightnessOffControl());
+//  toggleLayout->addWidget(horizontal_line());
+//  toggleLayout->addWidget(new OPKRServerSelect());
+//  toggleLayout->addWidget(horizontal_line());
+//  toggleLayout->addWidget(new OPKRServerAPI());
   toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new OPKRServerSelect());
-  toggleLayout->addWidget(horizontal_line());
-  toggleLayout->addWidget(new OPKRServerAPI());
+  toggleLayout->addWidget(new TimeZoneSelectCombo());
 }
 
 SelectCar::SelectCar(QWidget* parent): QWidget(parent) {
@@ -2294,3 +2393,4 @@ LateralControl::LateralControl(QWidget* parent): QWidget(parent) {
 
   main_layout->addWidget(list);
 }
+
