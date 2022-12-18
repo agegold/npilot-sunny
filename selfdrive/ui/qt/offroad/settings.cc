@@ -343,7 +343,7 @@ void SoftwarePanel::updateLabels() {
     lastUpdate = timeAgo(QDateTime::fromString(QString::fromStdString(tm + "Z"), Qt::ISODate));
   }
 
-  versionLbl->setText(getBrandVersion());
+  versionLbl->setText("HKG 0817 EON");
   lastUpdateLbl->setText(lastUpdate);
   updateBtn->setText("CHECK");
   updateBtn->setEnabled(true);
@@ -2293,6 +2293,7 @@ CommunityPanel::CommunityPanel(QWidget* parent) : QWidget(parent) {
 //  toggleLayout->addWidget(new OPKRServerAPI());
   toggleLayout->addWidget(horizontal_line());
   toggleLayout->addWidget(new TimeZoneSelectCombo());
+  toggleLayout->addWidget(new DepartChimeAtResume());
 }
 
 SelectCar::SelectCar(QWidget* parent): QWidget(parent) {

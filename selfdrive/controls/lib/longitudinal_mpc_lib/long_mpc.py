@@ -48,8 +48,9 @@ ACADOS_SOLVER_TYPE = 'SQP_RTI'
 CRUISE_GAP_BP = [1., 2., 3., 4.]
 CRUISE_GAP_V = [1.1, 1.3, 1.58, 2.10]
 
-AUTO_TR_BP = [0., 50.*CV.KPH_TO_MS, 100.*CV.KPH_TO_MS, 130.*CV.KPH_TO_MS]
-AUTO_TR_V = [1.0, 1.2, 1.3, 1.4]
+AUTO_TR_BP = [0., 30.*CV.KPH_TO_MS, 70.*CV.KPH_TO_MS, 110.*CV.KPH_TO_MS]
+#AUTO_TR_V = [1.0, 1.2, 1.33, 1.45]
+AUTO_TR_V = [1.2, 1.3, 1.4, 1.5]
 
 AUTO_TR_CRUISE_GAP = 4
 DIFF_RADAR_VISION = 1.5
@@ -329,10 +330,9 @@ class LongitudinalMpc:
 
   def update(self, carstate, radarstate, model, v_cruise, x, v, a, j, prev_accel_constraint):
     #opkr
-    self.lo_timer += 1
-    if self.lo_timer > 200:
-      self.lo_timer = 0
-      self.stop_line_x_offset = ntune_scc_get("STOP_LINE_X_OFFSET")
+    # self.lo_timer += 1
+    # if self.lo_timer > 200:
+    #   self.lo_timer = 0
 
     self.trafficState = 0
     v_ego = self.x0[1]
@@ -399,7 +399,13 @@ class LongitudinalMpc:
 
     x = (x[N] + 5.0) * np.ones(N+1)
 
-    stopline3 = ((stopline*0.2)+(x*0.8)) + self.stop_line_x_offset
+    stopline3 = ((stopline*0.2)+(x*0.8))
+
+    if stopline3[N] >= 50.:
+      #self.stop_line_x_offset = interp(v_ego, [9.0, 10.0, 12.0, 13.0], [0., -3.0, -4.5, -5.5])
+      self.stop_line_x_offset = interp(v_ego, [9.0, 10.0, 12.0, 13.0], [0., -1.0, -1.5, -3.0])
+
+    stopline3 += self.stop_line_x_offset 
 
     stopping = True if (self.stop_line and self.trafficState == 1 and v_ego*CV.MS_TO_MPH <= 50. and not self.status and not carstate.brakePressed and not carstate.gasPressed) else False
     
@@ -412,8 +418,8 @@ class LongitudinalMpc:
       if v_ego < 0.5:
         stopline3 *= 0.0
 
-      self.x_ego_obstacle_cost = 6
-      self.set_weights(prev_accel_constraint)
+      # self.x_ego_obstacle_cost = 8
+      # self.set_weights(prev_accel_constraint)
 
       self.source = SOURCES[3]
       self.params[:,2] = stopline3

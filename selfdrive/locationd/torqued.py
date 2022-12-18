@@ -16,9 +16,9 @@ from selfdrive.controls.lib.vehicle_model import ACCELERATION_DUE_TO_GRAVITY
 HISTORY = 5  # secs
 POINTS_PER_BUCKET = 1500
 MIN_POINTS_TOTAL = 4000
-MIN_POINTS_TOTAL_QLOG = 800
+MIN_POINTS_TOTAL_QLOG = 600
 FIT_POINTS_TOTAL = 2000
-FIT_POINTS_TOTAL_QLOG = 800
+FIT_POINTS_TOTAL_QLOG = 600
 MIN_VEL = 15  # m/s
 FRICTION_FACTOR = 1.5  # ~85% of data coverage
 FACTOR_SANITY = 0.3
@@ -147,8 +147,11 @@ class TorqueEstimator:
           cloudlog.info("restored torque params from cache")
       except Exception:
         cloudlog.exception("failed to restore cached torque params")
-        params.remove("LiveTorqueCarParams")
-        params.remove("LiveTorqueParameters")
+        try:
+          params.remove("LiveTorqueCarParams")
+          params.remove("LiveTorqueParameters")
+        except:
+          print("torqued remove error.")
 
     self.filtered_params = {}
     for param in initial_params:
